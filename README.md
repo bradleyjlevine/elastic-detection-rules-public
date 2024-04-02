@@ -1,4 +1,4 @@
-[![Deploy Detection Rules](https://github.com/bradleyjlevine/elastic-detection-rules/actions/workflows/deploy_detection_rules.yml/badge.svg?event=push)](https://github.com/bradleyjlevine/elastic-detection-rules/actions/workflows/deploy_detection_rules.yml)
+[![Deploy Detection Rules](https://github.com/bradleyjlevine/elastic-detection-rules-public/actions/workflows/deploy_detection_rules.yml/badge.svg)](https://github.com/bradleyjlevine/elastic-detection-rules-public/actions/workflows/deploy_detection_rules.yml)
 
 ### Start
 You will need to add GitHub secrets that match the ones in the `.github/workflows/deploy_detection_rules.yml`:
