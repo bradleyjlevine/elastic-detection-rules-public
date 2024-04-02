@@ -20,7 +20,7 @@ jobs:
             - name: Checking out for 
               uses: actions/checkout@v4
               with:
-                fetch-depth: 1
+                fetch-depth: 2
 
             # - name: Configure AWS
             #   uses: aws-actions/configure-aws-credentials@v4
