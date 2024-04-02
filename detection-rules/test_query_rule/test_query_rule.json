@@ -4,7 +4,7 @@
     ],
     "name": "Query Rule [API Test]",
     "description": "Bob is a pretty cool guy, and is good at making burgers.",
-    "risk_score": 19,
+    "risk_score": 20,
     "severity": "low",
     "type": "query",
     "language": "kuery",
