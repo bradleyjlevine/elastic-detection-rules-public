@@ -1,0 +1,58 @@
+{
+    "author": [
+        "Brad L."
+    ],
+    "name": "Query Rule [API Test]",
+    "description": "Bob is a pretty cool guy, and is good at making burgers.",
+    "risk_score": 19,
+    "severity": "low",
+    "type": "query",
+    "language": "kuery",
+    "index": [
+        "logs-*"
+    ],
+    "query": "logs-*",
+    "filters": [
+        {
+            "term": {
+                "event.dataset": "windows.sysmon_operational"
+            }
+        }
+    ],
+    "enabled": true,
+    "interval": "5m",
+    "from": "now-6m",
+    "max_signals": 1,
+    "tags": [
+        "Managed By: GitHub"
+    ],
+    "threat": [
+        {
+            "framework": "MITRE ATT&CK",
+            "tactic": {
+                "id": "TA0009",
+                "name": "Collection",
+                "reference": "https://attack.mitre.org/tactics/TA0009/"
+            },
+            "technique": [
+                {
+                    "id": "T1114",
+                    "name": "Email Collection",
+                    "reference": "https://attack.mitre.org/techniques/T1114/",
+                    "subtechnique": [
+                        {
+                            "id": "T1114.001",
+                            "name": "Local Email Collection",
+                            "reference": "https://attack.mitre.org/techniques/T1114/001/"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": 1,
+    "metadata": {
+        "managed_by": "GitHub",
+        "space_id": "vector"
+    }
+}

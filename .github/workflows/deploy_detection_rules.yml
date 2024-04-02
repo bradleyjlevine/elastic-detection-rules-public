@@ -1,0 +1,55 @@
+name: Deploy Detection Rules
+run-name: ${{ github.actor }} ${{ github.event_name }}ed for "${{ github.repository }}" on "${{ github.sha }}" workflow "${{ github.workflow }}"
+
+on:
+    push:
+     branches:
+       - main
+     paths:
+       - 'detection-rules/**/*.toml'
+       - 'detection-rules/**/*.json'
+    workflow_dispatch:
+
+jobs:
+    deploy-detection-rules:
+        runs-on: ubuntu-latest
+        env:
+            ELASTIC_API_KEY: ${{ secrets.ELASTIC_API_KEY }}
+            KIBANA_HOST: ${{ secrets.KIBANA_HOST }}
+        steps:
+            - name: Checking out for 
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 1
+
+            # - name: Configure AWS
+            #   uses: aws-actions/configure-aws-credentials@v4
+            #   with:
+            #     aws-region: us-east-1
+
+            # - name: Get Secrets by Name and by ARN
+            #   uses: aws-actions/aws-secretsmanager-get-secrets@v2
+            #   with:
+            #     secret-ids: |
+            #       AWS_SECRET,${{ secrets.AWS_SM_ARN }}
+            #     parse-json-secrets: false
+            
+            - uses: actions/setup-python@v4
+              with:
+                python-version: ">=3.10 <3.12"
+            
+            - run: mkdir running
+            - run: git diff HEAD HEAD^1 --name-only | grep -P "^detection-rules/" > running/rules_to_validate.txt
+            - run: cat ./running/rules_to_validate.txt
+            - run: pip install -r ./development/requirements.txt
+            - run: python ./development/dr-validator.py
+            - run: cat ./running/rules_to_elevate.txt
+            - run: python ./development/dr-update.py
+            - run: |
+                git add -A
+                if [ -z "$(git status --porcelain)" ]; then
+                  echo "No changes to commit"
+                else
+                  git commit -m "Post Deploy Commit [skip ci]"
+                fi
+            - run: git push
