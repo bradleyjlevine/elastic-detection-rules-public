@@ -28,6 +28,7 @@ The `rule_id` is automatically generated if not present in toml or json detectio
 1. Update line 15 to self-hosted
    - You will need to install a runner on a EC2 Instance
 2. Uncomment lines 25 - 35 to get your credentials from AWS Secrets Manager using the Instance Role on your runner.
+3. Add new secret for `${{ secrets.AWS_SM_ARN }}` this is the ARN for the Secret
 
 <br>
 
